@@ -33,7 +33,7 @@ public class AuthController {
     private final IInterviewService iInterviewService;
     @CrossOrigin(origins = "//localhost:3000/")
 
-    @Operation(summary = "Sử dụng phương thức này để đăng nhập bằng tài khoản google")
+    @Operation(summary = "Sử dụng phương thức này để đăng nhập bằng tài khoản quan :))")
     @PostMapping("/google/login")
     public ResponseEntity<AuthenticationResponseDTO> loginGoogle(@RequestBody GoogleRequestDTO requestDTO){
         return authenticationService.saveOrUpdateUser(requestDTO,Role.CANDIDATE,AuthenticationProvider.GOOGLE);
