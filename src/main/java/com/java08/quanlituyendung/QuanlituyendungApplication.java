@@ -10,9 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 @EnableAsync
 public class QuanlituyendungApplication {
-
 	public static void main(String[] args) {
-		SpringApplication.run(QuanlituyendungApplication.class, args);
+		// Fetch PORT environment variable for Railway
+		String port = System.getenv("PORT");
+		if (port == null) {
+			port = "8080"; // Default to 8080 if PORT not set
+		}
+		SpringApplication.run(QuanlituyendungApplication.class, new String[] { "--server.port=" + port });
 	}
 
 	@Bean
@@ -20,7 +24,6 @@ public class QuanlituyendungApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				WebMvcConfigurer.super.addCorsMappings(registry);
 				registry.addMapping("/**")
 						.allowedOriginPatterns("*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
