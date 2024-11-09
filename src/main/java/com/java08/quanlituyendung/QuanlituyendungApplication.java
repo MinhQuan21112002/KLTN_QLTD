@@ -15,17 +15,13 @@ public class QuanlituyendungApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(QuanlituyendungApplication.class, args);
 	}
-
-	@Value("${ALLOWED_ORIGIN:https://alert-emotion-production.up.railway.app/}")
-	private String allowedOrigin;
-
 	@Bean
 	public WebMvcConfigurer configurer() {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins(allowedOrigin)
+						.allowedOrigins("*")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 						.allowCredentials(true)
 						.maxAge(3600);
