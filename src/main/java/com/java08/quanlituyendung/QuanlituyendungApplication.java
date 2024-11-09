@@ -1,5 +1,6 @@
 package com.java08.quanlituyendung;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -10,14 +11,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 @EnableAsync
 public class QuanlituyendungApplication {
+
 	public static void main(String[] args) {
-		// Fetch PORT environment variable for Railway
-		String port = System.getenv("PORT");
-		if (port == null) {
-			port = "8080"; // Default to 8080 if PORT not set
-		}
-		SpringApplication.run(QuanlituyendungApplication.class, new String[] { "--server.port=" + port });
+		SpringApplication.run(QuanlituyendungApplication.class, args);
 	}
+
+	@Value("${ALLOWED_ORIGIN:https://alert-emotion-production.up.railway.app/}")
+	private String allowedOrigin;
 
 	@Bean
 	public WebMvcConfigurer configurer() {
@@ -25,7 +25,7 @@ public class QuanlituyendungApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOriginPatterns("*")
+						.allowedOrigins(allowedOrigin)
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 						.allowCredentials(true)
 						.maxAge(3600);
