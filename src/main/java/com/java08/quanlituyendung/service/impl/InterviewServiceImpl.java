@@ -100,6 +100,17 @@ public class InterviewServiceImpl implements IInterviewService {
                 new ResponseObjectT<>(HttpStatus.FORBIDDEN.toString(), Constant.YOU_DONT_HAVE_PERMISION, null));
     }
 
+    @Override
+    public ResponseEntity<ResponseObjectT<RoomResponseDTO>> getById(Long interviewId) {
+        var data = interviewRepository.findById(interviewId);
+        if (data.isPresent()) {
+            return ResponseEntity.ok(
+                    new ResponseObjectT<>(HttpStatus.OK.toString(), Constant.SUCCESS, interviewConverter.toDto(data.get()))
+            );
+        }
+        return ResponseEntity.ok(
+                new ResponseObjectT<>(HttpStatus.FORBIDDEN.toString(), Constant.YOU_DONT_HAVE_PERMISION, null));
+    }
 
     // tao tai khoan interview
     @Override
