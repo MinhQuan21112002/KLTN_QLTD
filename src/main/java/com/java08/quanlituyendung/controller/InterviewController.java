@@ -90,5 +90,10 @@ public class InterviewController {
     public ResponseEntity<ResponseObject> deleteInterview(@PathVariable Long roomId) {
         return service.deleteInterview(roomId);
     }
+     @Operation(summary = "Lấy theo id, dung chung")
+    @GetMapping("/getRoom/{interviewId}")
+    public ResponseEntity<ResponseObjectT<RoomResponseDTO>> getById(@PathVariable Long interviewId) {
+        return service.getById(interviewId);
+    }
 
 }
