@@ -32,7 +32,9 @@ public interface IInterviewService {
     ResponseEntity<ResponseObject> updateInterview(UpdateInterviewPayload request);
 
     ResponseEntity<ResponseObject> deleteInterview(Long roomId);
-
+    
+    ResponseEntity<ResponseObjectT<RoomResponseDTO>> getById(Long interviewId);
+    
     ResponseEntity<ResponseObjectT<List<RoomResponseDTO>>> getAllT(Authentication authentication);
 
     ResponseEntity<ResponseObject> createInterviewer(CreateAccountInterviewerDTO req, Authentication authentication);
