@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import com.java08.quanlituyendung.dto.company.CandidateCompanyItemDTO;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
