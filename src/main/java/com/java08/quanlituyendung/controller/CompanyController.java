@@ -32,7 +32,11 @@ public class CompanyController {
     public ResponseEntity<ResponseObject> getAllCompany() {
         return iCompanyService.getAllCompany();
     }
-
+    @Operation(summary = "Lấy danh sách các ứng viên theo công ty của tôi")
+    @GetMapping("/my-candidate")
+    public ResponseEntity<ResponseObject> getMyCandidate(Authentication authentication) {
+        return iJobPostingService.getMyCandidate(authentication);
+    }
     @Operation(summary = "Lấy cty theo id")
     @GetMapping("/{id}")
     public ResponseEntity<ResponseObject> getById(@PathVariable Long id) {
