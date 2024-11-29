@@ -150,4 +150,24 @@ public class JobPostingServiceImpl implements IJobPostingService {
                         .status(HttpStatus.FORBIDDEN.toString())
                         .message(Constant.FAIL).build());
     }
+
+     @Override
+    public ResponseEntity<ResponseObject> getMyCandidate(Authentication authentication) {
+        var user = userAccountRetriever.getUserAccountEntityFromAuthentication(authentication);
+        if (user != null) {
+            var jobs = jobPostingRepository.findByUserAccountEntity(user);
+            List<CandidateCompanyItemDTO> response =  jobPostingConverter.getListCandidateFromListJob(jobs);
+            return ResponseEntity.ok(ResponseObject.builder()
+                    .message("Success")
+                    .status(HttpStatus.OK.toString())
+                    .data(response)
+                    .build());
+
+        } else {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(ResponseObject.builder()
+                            .status(HttpStatus.FORBIDDEN.toString())
+                            .message(Constant.FAIL).build());
+        }
+    }
 }
