@@ -1,12 +1,30 @@
 package com.java08.quanlituyendung.converter;
 
 import com.java08.quanlituyendung.dto.JobPostingDTO;
+import com.java08.quanlituyendung.dto.company.CandidateCompanyItemDTO;
+import com.java08.quanlituyendung.entity.CVEntity;
+import com.java08.quanlituyendung.entity.InterviewDetailEntity;
 import com.java08.quanlituyendung.entity.JobPostingEntity;
+import com.java08.quanlituyendung.entity.UserAccountEntity;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import com.java08.quanlituyendung.repository.InterviewDetailRepository;
+import com.java08.quanlituyendung.repository.UserAccountRepository;
 @Component
 public class JobPostingConverter {
+
+    @Autowired
+    private InterviewDetailRepository interviewDetailRepository;
+
+    @Autowired
+    UserAccountRepository userAccountRepository;
     public JobPostingEntity toEntity(JobPostingDTO dto) {
         return JobPostingEntity.builder()
                 .name(dto.getName())
@@ -48,7 +66,46 @@ public class JobPostingConverter {
                 .user_id(Math.toIntExact(entity.getUserAccountEntity().getId()))
                 .build();
     }
+    public List<CandidateCompanyItemDTO> getListCandidateFromListJob(List<JobPostingEntity> jobs) {
+        List<CandidateCompanyItemDTO> response = new ArrayList<>();
+        List<InterviewDetailEntity> interviewDetails = interviewDetailRepository.findAll();
 
+        List<InterviewDetailEntity> interviewDetailsFilter = interviewDetails.stream()
+                .filter(item ->jobs.contains(item.getInterview().getJobPostingEntity()))
+                .collect(Collectors.toList());
+
+        interviewDetailsFilter.stream()
+                .map(this::interviewDetailToCandidateCompanyItemDTO)
+                .forEach(response::add);
+
+        return response;
+    }
+    public CandidateCompanyItemDTO interviewDetailToCandidateCompanyItemDTO(InterviewDetailEntity interviewDetail) {
+        Optional<UserAccountEntity> userAccountEntityOpt = userAccountRepository.findById(interviewDetail.getCandidateId());
+        if (userAccountEntityOpt.isPresent()) {
+            UserAccountEntity userAccountEntity = userAccountEntityOpt.get();
+            List<CVEntity> cvs = interviewDetail.getInterview().getJobPostingEntity().getCvEntities();
+            String cvUrl = cvs.stream()
+                    .filter(cv -> cv.getUserAccountEntity().equals(userAccountEntity))
+                    .findFirst()
+                    .map(CVEntity::getUrl)
+                    .orElse("");
+
+            return CandidateCompanyItemDTO.builder()
+                    .detailId(interviewDetail.getId())
+                    .candidateId(interviewDetail.getCandidateId())
+                    .name(userAccountEntity.getUserInfo().getFullName())
+                    .email(userAccountEntity.getEmail())
+                    .jobApplied(interviewDetail.getInterview().getJobPostingEntity().getName())
+                    .status(interviewDetail.getStatus())
+                    .avatar(userAccountEntity.getUserInfo().getAvatar())
+                    .cv(cvUrl)
+                    .score(interviewDetail.getAverageScore().toString())
+                    .build();
+        }
+        return null;
+
+    }
     public JobPostingEntity toEntity(JobPostingDTO dto, JobPostingEntity entity) {
         if (dto.getName() != null) {
             entity.setName(dto.getName());
@@ -116,20 +173,6 @@ public class JobPostingConverter {
         obj.put("image", jobPostingEntity.getImage());
         obj.put("status", jobPostingEntity.getStatus());
         return obj;
-    }
-       public List<CandidateCompanyItemDTO> getListCandidateFromListJob(List<JobPostingEntity> jobs) {
-        List<CandidateCompanyItemDTO> response = new ArrayList<>();
-        List<InterviewDetailEntity> interviewDetails = interviewDetailRepository.findAll();
-
-        List<InterviewDetailEntity> interviewDetailsFilter = interviewDetails.stream()
-                .filter(item ->jobs.contains(item.getInterview().getJobPostingEntity()))
-                .collect(Collectors.toList());
-
-        interviewDetailsFilter.stream()
-                .map(this::interviewDetailToCandidateCompanyItemDTO)
-                .forEach(response::add);
-
-        return response;
     }
     public JSONObject toJsonForUser(JobPostingEntity jobPostingEntity){
         JSONObject obj = new JSONObject();
