@@ -117,6 +117,20 @@ public class JobPostingConverter {
         obj.put("status", jobPostingEntity.getStatus());
         return obj;
     }
+       public List<CandidateCompanyItemDTO> getListCandidateFromListJob(List<JobPostingEntity> jobs) {
+        List<CandidateCompanyItemDTO> response = new ArrayList<>();
+        List<InterviewDetailEntity> interviewDetails = interviewDetailRepository.findAll();
+
+        List<InterviewDetailEntity> interviewDetailsFilter = interviewDetails.stream()
+                .filter(item ->jobs.contains(item.getInterview().getJobPostingEntity()))
+                .collect(Collectors.toList());
+
+        interviewDetailsFilter.stream()
+                .map(this::interviewDetailToCandidateCompanyItemDTO)
+                .forEach(response::add);
+
+        return response;
+    }
     public JSONObject toJsonForUser(JobPostingEntity jobPostingEntity){
         JSONObject obj = new JSONObject();
         obj.put("name", jobPostingEntity.getName());
