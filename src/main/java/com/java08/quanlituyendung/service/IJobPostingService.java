@@ -12,4 +12,5 @@ public interface IJobPostingService {
     ResponseEntity<ResponseObject> save(JobPostingDTO jobPostingDTO, Authentication authentication);
     ResponseEntity<ResponseObject> delete(Long id);
     ResponseEntity<ResponseObject> getCompanyJobs(Long id);
+    ResponseEntity<ResponseObject> getMyCandidate(Authentication authentication);
 }
