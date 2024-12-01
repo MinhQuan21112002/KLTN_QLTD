@@ -74,7 +74,7 @@ public class EventRequestConverter {
     public static Event convertToEventCalendar(CalendarAddRequestDTO requestDTO) {
         Event event = new Event();
 
-        event.setSummary("Bạn có một buổi phỏng vấn với FPT Software: "+requestDTO.getSummary());
+        event.setSummary("Bạn có một buổi phỏng vấn với: "+requestDTO.getSummary());
         event.setDescription("Lưu ý: "+requestDTO.getDescription());
 
         DateTime startDateTime = new DateTime(requestDTO.getStartTime());
