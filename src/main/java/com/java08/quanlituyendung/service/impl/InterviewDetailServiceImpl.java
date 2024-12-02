@@ -108,4 +108,24 @@ public class InterviewDetailServiceImpl implements IInterviewDetailService {
     }
 
 
+    @Override
+    public ResponseEntity<ResponseObject> changeStatus(Long detailId, String status, Authentication authentication) {
+        var user = userAccountRetriever.getUserAccountEntityFromAuthentication(authentication);
+        var detail = interviewDetailRepository.findById(detailId);
+        if(user !=null && detail.isPresent()) {
+            var d=  detail.get();
+            d.setStatus(status);
+            interviewDetailRepository.save(d);
+            return ResponseEntity.ok(ResponseObject.builder()
+                    .status(HttpStatus.OK.toString())
+                    .message("SUCCESS !")
+                    .build());
+        }
+        return ResponseEntity.ok(ResponseObject.builder()
+                .status(HttpStatus.NOT_FOUND.toString())
+                .message("Can't find interview detail")
+                .build());
+    }
+
+
 }
