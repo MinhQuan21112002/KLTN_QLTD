@@ -3,6 +3,7 @@ package com.java08.quanlituyendung.controller;
 
 import com.java08.quanlituyendung.dto.InterviewPayload.MarkCandidatePayload;
 import com.java08.quanlituyendung.dto.ResponseObject;
+import com.java08.quanlituyendung.dto.RoomStatusDTO;
 import com.java08.quanlituyendung.service.IInterviewDetailService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -39,5 +40,11 @@ public class InterviewDetailController {
     @PostMapping("/mark")
     public ResponseEntity<ResponseObject> markCandidate(@RequestBody MarkCandidatePayload request, Authentication authentication) {
         return iInterviewDetailService.markCandidate(request, authentication);
+    }
+
+    @Operation(summary = "Thay đổi trạng thái")
+    @PostMapping("/hiring-status/{detailId}")
+    public ResponseEntity<ResponseObject> changeHiringStatus(@PathVariable Long detailId, @RequestBody RoomStatusDTO status, Authentication authentication){
+        return  iInterviewDetailService.changeStatus(detailId,status.getStatus(),authentication);
     }
 }
