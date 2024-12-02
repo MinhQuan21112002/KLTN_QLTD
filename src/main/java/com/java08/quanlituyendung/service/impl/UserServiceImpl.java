@@ -316,51 +316,15 @@ public class UserServiceImpl implements IUserService {
                 .build());
     }
 
-    @Override
+  @Override
     public ResponseEntity<ResponseObject> getAllUserInfo() {
-        List<UserInfoDataDTO> dtoList = new ArrayList<>();
-        List<UserInfoEntity> entityList = userInfoRepository.findAll();
-        for (UserInfoEntity userInfoEntity : entityList) {
-            UserInfoDataDTO dto = userInfoConverter.toDto(userInfoEntity);
-            UserAccountEntity userAccountEntity = userAccountRepository.findOneById(userInfoEntity.getId());
-            if (userAccountEntity.getStatus() == Status.BLACKLIST) {
-                List<BlacklistEntity> listBlacklistEntity = blackListRepository
-                        .findBlacklistEntityByUserAccountEntity(userAccountEntity);
-                if (listBlacklistEntity.size() != 0 || listBlacklistEntity != null) {
-                    dto.setDateBlacklist(listBlacklistEntity.get(listBlacklistEntity.size() - 1)
-                            .getDateBlacklist().toString());
-                }
-            }
-            dto.setAccountStatus(userAccountEntity.getState().toString());
-            dto.setDateRegister(userAccountEntity.getCreationTime().toString());
-            dto.setEmail(userAccountEntity.getEmail());
-            dto.setPermission(userAccountEntity.getRole().toString());
-            dto.setStatus(userAccountEntity.getStatus().toString());
-            dto.setUsername(userAccountEntity.getUsername());
-            List<CVEntity> listCV = cvRepository.findAllByUserAccountEntityId(userInfoEntity.getId());
-            List<JSONObject> listJobPosting = new ArrayList<>();
-            for (CVEntity cv : listCV) {
-                JobPostingEntity jobPostingEntity = cv.getJobPostingEntity();
-                JSONObject objJobPosting = jobPostingConverter.toJsonForUser(jobPostingEntity);
-                listJobPosting.add(objJobPosting);
-            }
-            dto.setListJobPosting(listJobPosting);
-            List<InterviewDetailEntity> listInterviewDetail = interviewDetailRepository
-                    .findByCandidateId(userInfoEntity.getId());
-            List<JSONObject> listInterviewJsonObject = new ArrayList<>();
-            for (InterviewDetailEntity interview : listInterviewDetail) {
-                JSONObject objInterview = interviewDetailConverter.toJsonForUser(interview);
-                listInterviewJsonObject.add(objInterview);
-            }
-            dto.setListInterview(listInterviewJsonObject);
-            dtoList.add(dto);
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(
-                ResponseObject.builder()
-                        .status(HttpStatus.OK.toString())
-                        .message(Constant.SUCCESS)
-                        .data(dtoList)
-                        .build());
+        var list = userAccountRepository.findAll().stream()
+                .map(userAccountConverter::AccountToCustomeResponse)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(ResponseObject.builder()
+                .status(HttpStatus.OK.toString())
+                .data(list)
+                .message(Constant.SUCCESS).build());
     }
 
     @Override
