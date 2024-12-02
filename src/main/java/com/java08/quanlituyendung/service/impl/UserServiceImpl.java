@@ -320,7 +320,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public ResponseEntity<ResponseObject> getAllUserInfo() {
         var list = userAccountRepository.findAll().stream()
-                .map(userAccountConverter::AccountToCustomeResponse)
+                .map(userAccountConverter::AccountToCustomeResponse2)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(ResponseObject.builder()
                 .status(HttpStatus.OK.toString())
