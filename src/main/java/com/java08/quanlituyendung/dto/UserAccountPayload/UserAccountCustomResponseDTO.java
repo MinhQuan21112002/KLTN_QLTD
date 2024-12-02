@@ -1,6 +1,7 @@
 package com.java08.quanlituyendung.dto.UserAccountPayload;
 
 
+import com.java08.quanlituyendung.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,5 @@ public class UserAccountCustomResponseDTO {
     private String avatar;
     private String fullName;
     private String username;
+    private Status blackList;
 }
