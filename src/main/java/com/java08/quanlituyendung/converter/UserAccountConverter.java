@@ -241,6 +241,16 @@ public class UserAccountConverter {
         responseDTO.setUsername(userAccount.getUsernameReal());
         return responseDTO;
     }
+    public UserAccountCustomResponseDTO AccountToCustomeResponse2(UserAccountEntity userAccount){
+        UserAccountCustomResponseDTO responseDTO = new UserAccountCustomResponseDTO();
+        responseDTO.setId(userAccount.getId());
+        responseDTO.setEmail(userAccount.getEmail());
+        responseDTO.setAvatar(userAccount.getUserInfo().getAvatar());
+        responseDTO.setFullName(userAccount.getUserInfo().getFullName());
+        responseDTO.setUsername(userAccount.getUsernameReal());
+        responseDTO.setBlackList(userAccount.getStatus());
+        return responseDTO;
+    }
     private <T> void setFirstNonNullElement(List<T> list, Consumer<T> setter) {
         if (list != null) {
             for (T element : list) {
