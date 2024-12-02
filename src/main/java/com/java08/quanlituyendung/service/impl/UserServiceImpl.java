@@ -252,8 +252,19 @@ public class UserServiceImpl implements IUserService {
                             System.out.print("  link: "+interviewDetailEntity.getInterview().getLinkmeet());
                             objJobPosting.put("linkMeet",
                                     interviewDetailEntity.getInterview().getLinkmeet());
-                            LocalDate dateInterview = LocalDate.parse(interviewDetailEntity.getDate(), inputFormatter);
-                            objJobPosting.put("dateInterview", dateInterview.format(outputFormatter));
+                            if (interviewDetailEntity.getDate() != null) {
+                                try {
+                                    LocalDate dateInterview = LocalDate.parse(interviewDetailEntity.getDate(), inputFormatter);
+                                    objJobPosting.put("dateInterview", dateInterview.format(outputFormatter));
+                                } catch (DateTimeParseException e) {
+                                    // Log lỗi hoặc xử lý ngoại lệ nếu cần thiết
+                                    objJobPosting.put("dateInterview", null);
+                                }
+                            } else {
+                                objJobPosting.put("dateInterview", null);
+                            }
+
+
                             objJobPosting.put("timeInterview", interviewDetailEntity.getTime());
                             List<UserAccountEntity> interviewers = interviewDetailEntity
                                     .getInterview().getInterviewers();
