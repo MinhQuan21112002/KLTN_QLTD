@@ -172,7 +172,7 @@ public class InterviewServiceImpl implements IInterviewService {
         var list = userAccountRepository.findAll().stream()
                 .filter(userAccountEntity -> userAccountEntity
                         .getRole().equals(Role.INTERVIEWER))
-                .map(userAccountConverter::AccountToCustomeResponse)
+                .map(userAccountConverter::AccountToCustomeResponse2)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(ResponseObject.builder()
                 .status(HttpStatus.OK.toString())
