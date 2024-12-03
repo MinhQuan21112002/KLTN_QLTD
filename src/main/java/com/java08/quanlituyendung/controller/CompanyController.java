@@ -1,6 +1,7 @@
 package com.java08.quanlituyendung.controller;
 
 
+import com.java08.quanlituyendung.dto.RegisterRequestDTO;
 import com.java08.quanlituyendung.dto.ResponseObject;
 import com.java08.quanlituyendung.dto.company.CompanyDTO;
 import com.java08.quanlituyendung.exception.CompanyException;
@@ -72,6 +73,12 @@ public class CompanyController {
             String errorMessage = "An error occurred while updating the company information: " + ex.getMessage();
             return ResponseEntity.internalServerError().body(ResponseObject.builder().message(errorMessage).build());
         }
+    }
+
+    @Operation(summary = "Dang ki Reccer")
+    @PostMapping("/register-reccer")
+    public ResponseEntity<ResponseObject> registerReccer(@RequestBody RegisterRequestDTO request, Authentication authentication) {
+        return iCompanyService.registerReccer(request, authentication);
     }
 
 }
