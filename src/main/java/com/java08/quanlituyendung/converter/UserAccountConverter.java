@@ -9,6 +9,7 @@ import com.java08.quanlituyendung.dto.CVTemporaryRequestDTO;
 import com.java08.quanlituyendung.dto.OAuth2RequestDTO;
 import com.java08.quanlituyendung.dto.ProfileUpdateRequestDTO;
 import com.java08.quanlituyendung.dto.RegisterRequestDTO;
+import com.java08.quanlituyendung.dto.UserAccountPayload.UserAccountCustomForReccerResponseDTO;
 import com.java08.quanlituyendung.dto.UserAccountPayload.UserAccountCustomResponseDTO;
 import com.java08.quanlituyendung.entity.*;
 import com.java08.quanlituyendung.repository.UserAccountRepository;
@@ -241,14 +242,15 @@ public class UserAccountConverter {
         responseDTO.setUsername(userAccount.getUsernameReal());
         return responseDTO;
     }
-    public UserAccountCustomResponseDTO AccountToCustomeResponse2(UserAccountEntity userAccount){
-        UserAccountCustomResponseDTO responseDTO = new UserAccountCustomResponseDTO();
+
+    public UserAccountCustomForReccerResponseDTO AccountToCustomeForReccerResponse(UserAccountEntity userAccount){
+        UserAccountCustomForReccerResponseDTO responseDTO = new UserAccountCustomForReccerResponseDTO();
         responseDTO.setId(userAccount.getId());
         responseDTO.setEmail(userAccount.getEmail());
         responseDTO.setAvatar(userAccount.getUserInfo().getAvatar());
         responseDTO.setFullName(userAccount.getUserInfo().getFullName());
         responseDTO.setUsername(userAccount.getUsernameReal());
-        responseDTO.setBlackList(userAccount.getStatus());
+        responseDTO.setReccerID(userAccount.getReccerId());
         return responseDTO;
     }
     private <T> void setFirstNonNullElement(List<T> list, Consumer<T> setter) {
