@@ -1,6 +1,5 @@
 package com.java08.quanlituyendung.service.impl;
 
-import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.model.Event;
 import com.java08.quanlituyendung.auth.UserAccountRetriever;
 import com.java08.quanlituyendung.calendar.CalendarGoogleService;
@@ -28,7 +27,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -172,13 +170,14 @@ public class InterviewServiceImpl implements IInterviewService {
         var list = userAccountRepository.findAll().stream()
                 .filter(userAccountEntity -> userAccountEntity
                         .getRole().equals(Role.INTERVIEWER))
-                .map(userAccountConverter::AccountToCustomeResponse2)
+                .map(userAccountConverter::AccountToCustomeForReccerResponse)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(ResponseObject.builder()
                 .status(HttpStatus.OK.toString())
                 .data(list)
                 .message(Constant.SUCCESS).build());
     }
+
 
     @Override
     public ResponseEntity<ResponseObject> getAllCandidateByJd(Long jobPostId) {
