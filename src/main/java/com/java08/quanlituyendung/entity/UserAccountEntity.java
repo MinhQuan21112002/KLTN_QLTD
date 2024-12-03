@@ -41,6 +41,7 @@ public class UserAccountEntity extends BaseEntity implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "reccer_id")
     private Long reccerId;
 
 
