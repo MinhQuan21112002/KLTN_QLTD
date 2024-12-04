@@ -344,7 +344,12 @@ public class UserServiceImpl implements IUserService {
                 }
             }
             dto.setAccountStatus(userAccountEntity.getState().toString());
-            dto.setDateRegister(userAccountEntity.getCreationTime().toString());
+            if (userAccountEntity.getCreationTime() != null) {
+                dto.setDateRegister(userAccountEntity.getCreationTime().toString());
+            } else {
+                dto.setDateRegister("N/A"); // Hoặc một giá trị mặc định khác
+            }
+
             dto.setEmail(userAccountEntity.getEmail());
             dto.setPermission(userAccountEntity.getRole().toString());
             dto.setStatus(userAccountEntity.getStatus().toString());
