@@ -251,6 +251,7 @@ public class UserAccountConverter {
         responseDTO.setFullName(userAccount.getUserInfo().getFullName());
         responseDTO.setUsername(userAccount.getUsernameReal());
         responseDTO.setReccerID(userAccount.getReccerId());
+        responseDTO.setStatus((userAccount.getStatus()));
         return responseDTO;
     }
     private <T> void setFirstNonNullElement(List<T> list, Consumer<T> setter) {
