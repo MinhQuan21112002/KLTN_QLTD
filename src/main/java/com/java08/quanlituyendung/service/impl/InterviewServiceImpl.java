@@ -260,12 +260,7 @@ public class InterviewServiceImpl implements IInterviewService {
         Optional<UserAccountEntity> candidate = userAccountRepository.findById(interviewDetailDTO.getCandidateId());
         Optional<InterviewEntity> interview = interviewRepository.findById(interviewDetailDTO.getInterviewId());
         if (candidate.isPresent() && interview.isPresent()) {
-            if (interviewHelper.isCandidateJoinJobRooms(candidate.get(), interview.get())) {
-                return ResponseEntity.ok(ResponseObject.builder()
-                        .status(HttpStatus.NOT_IMPLEMENTED.toString())
-                        .message("Candidate is assigned to this Room(Interview)!!")
-                        .build());
-            } else {
+
                 interviewDetailRepository.save(interviewHelper
                         .buildFirstTimeInterviewDetail(candidate.get(),
                                 interview.get(),
@@ -276,7 +271,7 @@ public class InterviewServiceImpl implements IInterviewService {
                         .message("Add candidate success!!!!!")
                         .data(interviewConverter.toDto(interview.get()))
                         .build());
-            }
+            
         }
         return ResponseEntity.ok(ResponseObject.builder()
                 .status(HttpStatus.NOT_FOUND.toString())
