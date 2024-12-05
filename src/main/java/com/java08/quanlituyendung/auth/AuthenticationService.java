@@ -251,13 +251,13 @@ public ResponseEntity<AuthenticationResponseDTO> saveOrUpdateUser(GoogleRequestD
             mailService.sendEmail(user.getEmail(),otpCode,EmailType.VERIFICATION);
 
             // check deliverable mail;
-            if (!mailService.isDeliverableMail(user.getEmail())) {
-                return ResponseEntity.status(HttpStatus.OK).body(
-                        AuthenticationResponseDTO.builder()
-                                .status(HttpStatus.BAD_REQUEST.toString())
-                                .message(Constant.MAIL_FAIL)
-                                .build());
-            }
+//            if (!mailService.isDeliverableMail(user.getEmail())) {
+//                return ResponseEntity.status(HttpStatus.OK).body(
+//                        AuthenticationResponseDTO.builder()
+//                                .status(HttpStatus.BAD_REQUEST.toString())
+//                                .message(Constant.MAIL_FAIL)
+//                                .build());
+//            }
             var savedUser = userAccountRepository.save(user);
             otpService.saveUserOtp(savedUser, otpCode, OtpType.VERIFY, 320);
             createUserInfo(user);
