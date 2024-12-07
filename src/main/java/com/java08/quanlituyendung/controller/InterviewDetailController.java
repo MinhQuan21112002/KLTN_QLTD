@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/interview-detail")
+@CrossOrigin(origins = "https://kltnfrontendqltd-production.up.railway.app")
 @Tag(name = "Score Candidate")
 public class InterviewDetailController {
 
