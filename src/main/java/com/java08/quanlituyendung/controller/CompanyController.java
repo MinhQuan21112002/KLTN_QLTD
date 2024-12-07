@@ -17,7 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "${allowed.origin}")
+@CrossOrigin(origins = "https://kltnfrontendqltd-production.up.railway.app")
 @RequestMapping("company")
 @RequiredArgsConstructor
 @Tag(name = "Company")
