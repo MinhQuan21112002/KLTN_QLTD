@@ -20,6 +20,7 @@ import java.util.List;
 
 
 @RestController
+@CrossOrigin(origins = "https://kltnfrontendqltd-production.up.railway.app")
 @RequestMapping("/interview")
 @RequiredArgsConstructor
 @Tag(name = "Room Interview")
