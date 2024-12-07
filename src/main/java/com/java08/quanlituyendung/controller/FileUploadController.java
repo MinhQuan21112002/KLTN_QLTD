@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.java08.quanlituyendung.service.IFileUploadService;
 
 @RestController
+@CrossOrigin(origins = "https://kltnfrontendqltd-production.up.railway.app")
 @RequestMapping("/file")
 @Tag(name = "File Upload")
 public class FileUploadController {
