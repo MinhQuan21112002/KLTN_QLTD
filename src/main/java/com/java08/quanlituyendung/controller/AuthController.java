@@ -24,7 +24,8 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "https://alert-emotion-production.up.railway.app","https://kltnfrontendqltd-production.up.railway.app/"})
+    @CrossOrigin(origins = "https://kltnfrontendqltd-production.up.railway.app")
+//@CrossOrigin(origins = {"http://localhost:3000", "https://alert-emotion-production.up.railway.app","https://kltnfrontendqltd-production.up.railway.app/"})
 @Tag(name = "Auth")
 public class AuthController {
 
