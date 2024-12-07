@@ -24,14 +24,14 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "https://alert-emotion-production.up.railway.app"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://alert-emotion-production.up.railway.app","https://kltnfrontendqltd-production.up.railway.app/"})
 @Tag(name = "Auth")
 public class AuthController {
 
     private final AuthenticationService authenticationService;
 
     private final IInterviewService iInterviewService;
-    @CrossOrigin(origins = {"http://localhost:3000", "https://alert-emotion-production.up.railway.app"})
+    @CrossOrigin(origins = {"http://localhost:3000", "https://alert-emotion-production.up.railway.app","https://kltnfrontendqltd-production.up.railway.app/"})
 
     @Operation(summary = "Sử dụng phương thức này để đăng nhập bằng tài khoản quan :))")
     @PostMapping("/google/login")
