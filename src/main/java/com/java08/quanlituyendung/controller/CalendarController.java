@@ -17,6 +17,7 @@ import java.security.GeneralSecurityException;
 
 
 @RestController
+@CrossOrigin(origins = "https://kltnfrontendqltd-production.up.railway.app")
 @RequestMapping("/calendar")
 @RequiredArgsConstructor
 @Tag(name = "Calendar")
