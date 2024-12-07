@@ -350,10 +350,10 @@ public class UserServiceImpl implements IUserService {
                 dto.setDateRegister("N/A"); // Hoặc một giá trị mặc định khác
             }
 
-            dto.setEmail(userAccountEntity.getEmail());
-            dto.setPermission(userAccountEntity.getRole().toString());
-            dto.setStatus(userAccountEntity.getStatus().toString());
-            dto.setUsername(userAccountEntity.getUsername());
+            dto.setEmail(userAccountEntity.getEmail() != null ? userAccountEntity.getEmail() : "N/A");
+            dto.setPermission(userAccountEntity.getRole() != null ? userAccountEntity.getRole().toString() : "N/A");
+            dto.setStatus(userAccountEntity.getStatus() != null ? userAccountEntity.getStatus().toString() : "INPROCESS");
+            dto.setUsername(userAccountEntity.getUsername() != null ? userAccountEntity.getUsername() : "Anonymous");
             List<CVEntity> listCV = cvRepository.findAllByUserAccountEntityId(userInfoEntity.getId());
             List<JSONObject> listJobPosting = new ArrayList<>();
             for (CVEntity cv : listCV) {
