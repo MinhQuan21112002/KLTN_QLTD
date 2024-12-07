@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+
 @RestController
 @CrossOrigin(origins = "https://kltnfrontendqltd-production.up.railway.app")
 @RequestMapping(value = "/blacklist")
