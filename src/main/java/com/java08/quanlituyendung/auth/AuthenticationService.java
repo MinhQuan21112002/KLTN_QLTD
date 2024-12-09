@@ -237,13 +237,13 @@ public ResponseEntity<AuthenticationResponseDTO> saveOrUpdateUser(GoogleRequestD
                                 .message(Constant.EMAIL_EXISTED)
                                 .build());
             }
-            if (userAccountRepository.existsByUsername(request.getUsername())) {
-                return ResponseEntity.status(HttpStatus.OK).body(
-                        AuthenticationResponseDTO.builder()
-                                .status(HttpStatus.CONFLICT.toString())
-                                .message(Constant.USERNAME_IS_EXIST)
-                                .build());
-            }
+//            if (userAccountRepository.existsByUsername(request.getUsername())) {
+//                return ResponseEntity.status(HttpStatus.OK).body(
+//                        AuthenticationResponseDTO.builder()
+//                                .status(HttpStatus.CONFLICT.toString())
+//                                .message(Constant.USERNAME_IS_EXIST)
+//                                .build());
+//            }
             var user = userAccountConverter.toEntityWithRole(request, role, authenticationProvider);
             var otpCode = RandomNumberGenerator.generateSixDigitNumber();
 
