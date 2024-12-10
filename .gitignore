@@ -3,7 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-# Ignore Google Cloud credentials
+# Ignore Google Cloud credentia
 src/main/resources/firebase-adminsdk.json
 
 # Ignore OAuth credentials
