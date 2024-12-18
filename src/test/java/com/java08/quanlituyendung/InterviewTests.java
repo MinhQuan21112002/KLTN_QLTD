@@ -69,7 +69,7 @@ class InterviewTests {
 
 	@Test
 	void getInterviewSuccess() throws Exception {
-		String token = login(mockMvc,"admin1@gmail.com","1234");
+		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
 		MvcResult result = mockMvc.perform(get("/interview")
 						.header("Authorization", "Bearer " + token)
 						.contentType(MediaType.APPLICATION_JSON))
@@ -82,7 +82,7 @@ class InterviewTests {
 
 	@Test
 	void getInterviewFail() throws Exception {
-		String token = login(mockMvc,"candidate100@gmail.com","1234");
+		String token = login(mockMvc,"quande2111202@gmail.com","Thanhmy123");
 		MvcResult result = mockMvc.perform(get("/interview")
 						.header("Authorization", "Bearer " + token)
 						.contentType(MediaType.APPLICATION_JSON))
@@ -93,14 +93,14 @@ class InterviewTests {
 
 	@Test
 	void addInterviewSuccess() throws Exception {
-		String token = login(mockMvc, "recruiter7@gmail.com", "1234");
+		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
 		InterviewCreateDTO requestDTO = new InterviewCreateDTO();
 		requestDTO.setJobPostId("1");
 		requestDTO.setRoomName("phong x jd 2");
 		requestDTO.setRoomSkill("python fast apiiii");
 		requestDTO.setRoomDescription("room3description");
-		requestDTO.setStartDate("28-7-2023");
-		requestDTO.setEndDate("28-7-2023");
+		requestDTO.setStartDate("28-12-2024");
+		requestDTO.setEndDate("30-12-2024");
 		String requestBody = objectMapper.writeValueAsString(requestDTO);
 		mockMvc.perform(post("/interview/create-interview")
 						.header("Authorization", "Bearer " + token)
@@ -114,7 +114,7 @@ class InterviewTests {
 	}
 	@Test
 	void addInterviewNotFound() throws Exception {
-		String token = login(mockMvc, "admin1@gmail.com", "1234");
+		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
 		InterviewCreateDTO requestDTO = new InterviewCreateDTO();
 		requestDTO.setJobPostId("223432432432423452");
 		requestDTO.setRoomName("phong x jd 2");
@@ -134,7 +134,7 @@ class InterviewTests {
 	}
 	@Test
 	void addInterviewForbidden() throws Exception {
-		String token = login(mockMvc, "nguyenkhanh2kpi@gmail.com", "12345");
+		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
 		InterviewCreateDTO requestDTO = new InterviewCreateDTO();
 		requestDTO.setJobPostId("2");
 		requestDTO.setRoomName("phong x jd 2");
