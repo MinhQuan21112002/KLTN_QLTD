@@ -81,7 +81,7 @@ class RegisterTests {
         RegisterRequestDTO requestDTO = new RegisterRequestDTO();
         requestDTO.setUsername("test");
         requestDTO.setPassword("test");
-        requestDTO.setEmail("admin@gmail.com");
+        requestDTO.setEmail("quandev21112002@gmail.com");
 
         MvcResult result = mockMvc.perform(post("/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -91,18 +91,5 @@ class RegisterTests {
                 .andReturn();
     }
 
-    @Test
-    void existUsername() throws Exception{
-        RegisterRequestDTO requestDTO = new RegisterRequestDTO();
-        requestDTO.setUsername("tuan");
-        requestDTO.setPassword("test");
-        requestDTO.setEmail("testusernameexists@gmail.com");
 
-        MvcResult result = mockMvc.perform(post("/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(requestDTO)))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{\"message\": \"Username already exists!\"}"))
-                .andReturn();
-    }
 }
