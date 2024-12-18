@@ -35,9 +35,9 @@ public class LoginTests {
 
     @Test
     public void testLoginSuccess() throws Exception {
-        String email = "admin@gmail.com";
+        String email = "user2@gmail.com";
         String username = "tuan";
-        String password = "1234";
+        String password = "Thanhmy123";
         AuthenticationRequestDTO request = new AuthenticationRequestDTO(email, password,username);
 
 
@@ -75,9 +75,9 @@ public class LoginTests {
     @Test
     public void testPasswordNotMatch() throws Exception {
 
-        String email = "admin@gmail.com";
+        String email = "user2@gmail.com";
         String username = "";
-        String password = "passworderror";
+        String password = "Thanhmy12";
         AuthenticationRequestDTO request = new AuthenticationRequestDTO(email, password,username);
 
         mockMvc.perform(post("/auth/login")
