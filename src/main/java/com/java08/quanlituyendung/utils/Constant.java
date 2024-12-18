@@ -51,5 +51,7 @@ public class Constant {
     public static final String JOBPOSTING_NOT_FOUND = "Job posting not found!";
     public static final String CAN_NOT_FIND_THIS_JOB = "Can not find this job!!";
     public static final String CAN_NOT_FIND_THIS_ROOM = "Can not find this room!!";
+    public static final String YOUR_ACCOUNT_IS_BANNED = "Your account is banned";
+
     public static final String YOUR_ACCOUNT_IS_NOT_ACTIVE = "Your account is not activate!!!";
 }
