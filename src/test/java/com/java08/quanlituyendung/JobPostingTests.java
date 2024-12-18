@@ -16,11 +16,14 @@
 //import org.springframework.boot.test.mock.mockito.MockBean;
 //import org.springframework.http.MediaType;
 //import org.springframework.http.ResponseEntity;
+//import org.springframework.security.core.Authentication;
+//import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.test.context.junit4.SpringRunner;
 //import org.springframework.test.web.servlet.MockMvc;
 //
 //import java.util.ArrayList;
 //import java.util.Arrays;
+//import java.util.Collection;
 //import java.util.List;
 //
 //import static org.mockito.Mockito.*;
@@ -67,7 +70,7 @@
 //
 //    @Test
 //    public void testGetAllJobPosting() throws Exception {
-//        String tk = login(mockMvc, "bacbonso3@gmail.com", "1234");
+//        String tk = login(mockMvc, "quandev21112002@gmail.com", "Thanhmy123");
 //        JobPostingDTO jobPostingDTO1 = new JobPostingDTO(
 //                1L,
 //                "Job 1",
@@ -85,7 +88,8 @@
 //                "Interest for Job 1",
 //                "image1.jpg",
 //                true,
-//                new ArrayList<>()
+//                new ArrayList<>(),
+//                2
 //        );
 //
 //        JobPostingDTO jobPostingDTO2 = new JobPostingDTO(
@@ -105,7 +109,7 @@
 //                "Interest for Job 2",
 //                "image2.jpg",
 //                true,
-//                new ArrayList<>()
+//                new ArrayList<>(),2
 //        );
 //
 //        List<JobPostingDTO> jobPostingList = Arrays.asList(jobPostingDTO1, jobPostingDTO2);
@@ -130,7 +134,7 @@
 //
 //    @Test
 //    public void testCreateJobPosting() throws Exception {
-//        String tk = login(mockMvc, "bacbonso3@gmail.com", "1234");
+//        String tk = login(mockMvc, "quandev21112002@gmail.com", "Thanhmy123");
 //        JobPostingDTO jobPostingDTO = new JobPostingDTO(
 //                1L,
 //                "Job 1",
@@ -148,7 +152,7 @@
 //                "Interest for Job 1",
 //                "image1.jpg",
 //                true,
-//                new ArrayList<>()
+//                new ArrayList<>(),2
 //        );
 //
 //        ObjectMapper objectMapper = new ObjectMapper();
@@ -157,7 +161,42 @@
 //        ResponseObject responseObject = new ResponseObject("OK", "Success!", jobPostingDTO);
 //
 //        doReturn(ResponseEntity.ok().body(responseObject))
-//                .when(jobPostingService).save(Mockito.any(JobPostingDTO.class));
+//                .when(jobPostingService).save(Mockito.any(JobPostingDTO.class), new Authentication() {
+//                    @Override
+//                    public Collection<? extends GrantedAuthority> getAuthorities() {
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public Object getCredentials() {
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public Object getDetails() {
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public Object getPrincipal() {
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public boolean isAuthenticated() {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+//
+//                    }
+//
+//                    @Override
+//                    public String getName() {
+//                        return null;
+//                    }
+//                });
 //
 //        mockMvc.perform(post("/job-posting")
 //                        .header("Authorization", "Bearer " + tk)
@@ -175,7 +214,7 @@
 //
 //    @Test
 //    public void testUpdateJobPosting() throws Exception {
-//        String tk = login(mockMvc, "bacbonso3@gmail.com", "1234");
+//        String tk = login(mockMvc, "quandev21112002@gmail.com", "Thanhmy123");
 //        long JobPostingId = 1L;
 //
 //        JobPostingDTO existingJobPosting = new JobPostingDTO(
@@ -195,7 +234,7 @@
 //                "Interest for Job 1",
 //                "image1.jpg",
 //                true,
-//                new ArrayList<>()
+//                new ArrayList<>(),2
 //        );
 //
 //        JobPostingDTO updatedJobPosting = new JobPostingDTO(
@@ -215,7 +254,7 @@
 //                "Updated Interest for Job 1",
 //                "image1.jpg",
 //                true,
-//                new ArrayList<>()
+//                new ArrayList<>(),2
 //        );
 //
 //        ObjectMapper objectMapper = new ObjectMapper();
@@ -224,7 +263,42 @@
 //        ResponseObject responseObject = new ResponseObject("OK", "Success!", updatedJobPosting);
 //
 //        doReturn(ResponseEntity.ok().body(responseObject))
-//                .when(jobPostingService).save(Mockito.any(JobPostingDTO.class));
+//                .when(jobPostingService).save(Mockito.any(JobPostingDTO.class), new Authentication() {
+//                    @Override
+//                    public Collection<? extends GrantedAuthority> getAuthorities() {
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public Object getCredentials() {
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public Object getDetails() {
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public Object getPrincipal() {
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    public boolean isAuthenticated() {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+//
+//                    }
+//
+//                    @Override
+//                    public String getName() {
+//                        return null;
+//                    }
+//                });
 //
 //        mockMvc.perform(put("/job-posting/{id}", JobPostingId)
 //                        .header("Authorization", "Bearer " + tk)
@@ -242,7 +316,7 @@
 //
 //    @Test
 //    public void testDeleteJobPosting() throws Exception {
-//        String tk = login(mockMvc, "bacbonso3@gmail.com", "1234");
+//        String tk = login(mockMvc, "quandev21112002@gmail.com", "Thanhmy123");
 //        long jobPostingIdToDelete = 1L;
 //
 //        doReturn(ResponseEntity.ok().body(new ResponseObject("OK", "Job posting deleted successfully.", null)))
@@ -259,7 +333,7 @@
 //
 //    @Test
 //    public void testGetDetailJobPosting() throws Exception {
-//        String tk = login(mockMvc, "bacbonso3@gmail.com", "1234");
+//        String tk = login(mockMvc, "quandev21112002@gmail.com", "Thanhmy123");
 //        long jobPostingId = 1L;
 //
 //        JobPostingDTO jobPostingDTO = new JobPostingDTO(
@@ -279,7 +353,7 @@
 //                "Interest for Job 1",
 //                "image1.jpg",
 //                true,
-//                new ArrayList<>()
+//                new ArrayList<>(),2
 //        );
 //        doReturn(ResponseEntity.ok().body(new ResponseObject("OK", "Job posting details retrieved successfully.", jobPostingDTO)))
 //                .when(jobPostingService).getDetailJobPosting(jobPostingId);
