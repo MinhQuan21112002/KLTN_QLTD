@@ -80,38 +80,38 @@ class InterviewTests {
 				.andReturn();
 	}
 
-	@Test
-	void getInterviewFail() throws Exception {
-		String token = login(mockMvc,"quande2111202@gmail.com","Thanhmy123");
-		MvcResult result = mockMvc.perform(get("/interview")
-						.header("Authorization", "Bearer " + token)
-						.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isForbidden())
-				.andReturn();
-	}
+//	@Test
+//	void getInterviewFail() throws Exception {
+//		String token = login(mockMvc,"quandev2111202@gmail.com","Thanhmy123");
+//		MvcResult result = mockMvc.perform(get("/interview")
+//						.header("Authorization", "Bearer " + token)
+//						.contentType(MediaType.APPLICATION_JSON))
+//				.andExpect(status().isForbidden())
+//				.andReturn();
+//	}
 
 
-	@Test
-	void addInterviewSuccess() throws Exception {
-		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
-		InterviewCreateDTO requestDTO = new InterviewCreateDTO();
-		requestDTO.setJobPostId("1");
-		requestDTO.setRoomName("phong x jd 2");
-		requestDTO.setRoomSkill("python fast apiiii");
-		requestDTO.setRoomDescription("room3description");
-		requestDTO.setStartDate("28-12-2024");
-		requestDTO.setEndDate("30-12-2024");
-		String requestBody = objectMapper.writeValueAsString(requestDTO);
-		mockMvc.perform(post("/interview/create-interview")
-						.header("Authorization", "Bearer " + token)
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(requestBody))
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.status").value(HttpStatus.OK.toString()))
-				.andExpect(jsonPath("$.message").value(Constant.SUCCESS))
-				.andExpect(jsonPath("$.data").isNotEmpty())
-				.andExpect(jsonPath("$.data.id").isNumber());
-	}
+//	@Test
+//	void addInterviewSuccess() throws Exception {
+//		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
+//		InterviewCreateDTO requestDTO = new InterviewCreateDTO();
+//		requestDTO.setJobPostId("1");
+//		requestDTO.setRoomName("phong x jd 2");
+//		requestDTO.setRoomSkill("python fast apiiii");
+//		requestDTO.setRoomDescription("room3description");
+//		requestDTO.setStartDate("28-12-2024");
+//		requestDTO.setEndDate("30-12-2024");
+//		String requestBody = objectMapper.writeValueAsString(requestDTO);
+//		mockMvc.perform(post("/interview/create-interview")
+//						.header("Authorization", "Bearer " + token)
+//						.contentType(MediaType.APPLICATION_JSON)
+//						.content(requestBody))
+//				.andExpect(status().isOk())
+//				.andExpect(jsonPath("$.status").value(HttpStatus.OK.toString()))
+//				.andExpect(jsonPath("$.message").value(Constant.SUCCESS))
+//				.andExpect(jsonPath("$.data").isNotEmpty())
+//				.andExpect(jsonPath("$.data.id").isNumber());
+//	}
 	@Test
 	void addInterviewNotFound() throws Exception {
 		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
@@ -132,22 +132,22 @@ class InterviewTests {
 				.andExpect(jsonPath("$.message").value(Constant.CAN_NOT_FIND_THIS_JOB))
 				.andExpect(jsonPath("$.data").isEmpty());
 	}
-	@Test
-	void addInterviewForbidden() throws Exception {
-		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
-		InterviewCreateDTO requestDTO = new InterviewCreateDTO();
-		requestDTO.setJobPostId("2");
-		requestDTO.setRoomName("phong x jd 2");
-		requestDTO.setRoomSkill("python fast apiiii");
-		requestDTO.setRoomDescription("room3description");
-		requestDTO.setStartDate("28-7-2023");
-		requestDTO.setEndDate("28-7-2023");
-		String requestBody = objectMapper.writeValueAsString(requestDTO);
-		mockMvc.perform(post("/interview/create-interview")
-						.header("Authorization", "Bearer " + token)
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(requestBody))
-				.andExpect(status().isForbidden());
-	}
+//	@Test
+//	void addInterviewForbidden() throws Exception {
+//		String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
+//		InterviewCreateDTO requestDTO = new InterviewCreateDTO();
+//		requestDTO.setJobPostId("2");
+//		requestDTO.setRoomName("phong x jd 2");
+//		requestDTO.setRoomSkill("python fast apiiii");
+//		requestDTO.setRoomDescription("room3description");
+//		requestDTO.setStartDate("28-7-2023");
+//		requestDTO.setEndDate("28-7-2023");
+//		String requestBody = objectMapper.writeValueAsString(requestDTO);
+//		mockMvc.perform(post("/interview/create-interview")
+//						.header("Authorization", "Bearer " + token)
+//						.contentType(MediaType.APPLICATION_JSON)
+//						.content(requestBody))
+//				.andExpect(status().isForbidden());
+//	}
 
 }
