@@ -59,7 +59,7 @@ class ProfileTests {
 
     @Test
     void getProfile() throws Exception {
-        String token = login(mockMvc,"tuanbmt123123@gmail.com","1234");
+        String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
         MvcResult result = mockMvc.perform(get("/profile")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -81,7 +81,7 @@ class ProfileTests {
                 "    \"avatar\": \"https://images2.thanhnien.vn/528068263637045248/2023/6/26/blackpinksanghanoivietnambieudien11-1687757871275987370049.jpg\",\r\n" + //
                 "    \"language\": \"Java\"\r\n" + //
                 "}";
-        String token = login(mockMvc,"tuanbmt123123@gmail.com","1234");
+        String token = login(mockMvc,"quandev21112002@gmail.com","Thanhmy123");
         MvcResult result = mockMvc.perform(put("/profile")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)

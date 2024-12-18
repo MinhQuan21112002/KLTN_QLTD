@@ -3,8 +3,8 @@ spring:
     default-encoding: UTF-8
     host: smtp.gmail.com
     port: 587
-    username: ${EMAIL_USERNAME}
-    password: ${EMAIL_PASSWORD}
+    username: cobedt123@gmail.com
+    password: czkxbisyxmgfjknz
     properties:
       mail:
         smtp:
@@ -15,4 +15,4 @@ spring:
     test-connection: false
     protocol: smtp
 deliverableMail:
-  api_key: ${DELIVERABLE_MAIL_API_KEY}
+  api_key: 2359fee504724cb3b2f46ff7d3390c1a

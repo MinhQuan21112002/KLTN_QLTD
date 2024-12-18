@@ -52,8 +52,8 @@ public class EventTests {
     public void setUp() throws Exception {
         RegisterRequestDTO requestDTO = new RegisterRequestDTO();
         requestDTO.setUsername("tdsdsfdsfsest");
-        requestDTO.setPassword("password");
-        requestDTO.setEmail("admin@gmail.com");
+        requestDTO.setPassword("Thanhmy123");
+        requestDTO.setEmail("quandev21112002@gmail.com");
 
 
         MvcResult resultCreate = mockMvc.perform(post("/auth/register")
@@ -95,7 +95,7 @@ public class EventTests {
 
     @Test
     public void testGetEventAPI() throws Exception {
-        String token = login("admin@gmail.com", "1234");
+        String token = login("quandev21112002@gmail.com", "Thanhmy123");
 
         String requestBodyCreate = "{\r\n" + //
                 "    \"title\": \"Testing create title\",\r\n" + //
@@ -133,7 +133,7 @@ public class EventTests {
     @Test // Add thành công, nhưng status code trả về là null thay vì 200
     public void testCreateEventAPI() throws Exception {
 
-        String token = login("admin@gmail.com", "1234");
+        String token = login("quandev21112002@gmail.com", "Thanhmy123");
         String requestBody = "{\r\n" + //
                 "    \"title\": \"Testing create title\",\r\n" + //
                 "    \"article\": \"Test article\",\r\n" + //
@@ -162,7 +162,7 @@ public class EventTests {
     @Test
     public void testDeleteEvent() throws Exception {
 
-        String token = login("admin@gmail.com", "1234");
+        String token = login("quandev21112002@gmail.com", "Thanhmy123");
 
         String requestBodyCreate = "{\r\n" + //
                 "    \"title\": \"Testing create title\",\r\n" + //
@@ -201,7 +201,7 @@ public class EventTests {
     @Test
     public void testUpdateEvent() throws Exception {
 
-        String token = login("admin@gmail.com", "1234");
+        String token = login("quandev21112002@gmail.com", "Thanhmy123");
 
         String requestBodyCreate = "{\r\n" + //
                 "    \"title\": \"Testing create title\",\r\n" + //
@@ -250,9 +250,9 @@ public class EventTests {
         @Test
     public void testUploadImage() throws Exception {
 
-        String token = login("admin@gmail.com", "1234");
+            String token = login("quandev21112002@gmail.com", "Thanhmy123");
 
-        String requestBodyCreate = "{\r\n" + //
+            String requestBodyCreate = "{\r\n" + //
                 "    \"title\": \"Testing create title\",\r\n" + //
                 "    \"article\": \"Test article\",\r\n" + //
                 "    \"time\": \"30-7-2023\",\r\n" + //
