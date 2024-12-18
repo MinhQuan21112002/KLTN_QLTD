@@ -1,5 +1,6 @@
 package com.java08.quanlituyendung.auth;
- 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
@@ -294,11 +295,18 @@ public ResponseEntity<AuthenticationResponseDTO> saveOrUpdateUser(GoogleRequestD
                     )
             );
             var user = userAccountRepository.findByEmail(request.getEmail()).orElseThrow();
-            if(user.getState()!= UserAccountEntity.State.ACTIVE) {
+            if(user.getState()== UserAccountEntity.State.UNAUTHENTICATED) {
                 return ResponseEntity.ok(
                         AuthenticationResponseDTO.builder()
                                 .status(HttpStatus.NOT_ACCEPTABLE.toString())
                                 .message(Constant.YOUR_ACCOUNT_IS_NOT_ACTIVE)
+                                .build());
+            }
+            if(user.getState()== UserAccountEntity.State.BANNED) {
+                return ResponseEntity.ok(
+                        AuthenticationResponseDTO.builder()
+                                .status(HttpStatus.NOT_ACCEPTABLE.toString())
+                                .message(Constant.YOUR_ACCOUNT_IS_BANNED)
                                 .build());
             }
             var jwtToken = jwtService.generateToken(user);
